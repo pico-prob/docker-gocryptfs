@@ -68,11 +68,11 @@ mkdir -p "$DEC_PATH"
 
 # CHANGED: Initialize gocryptfs in /encrypted if it hasn't been set up yet.
 if [ ! -f "${ENC_PATH}/gocryptfs.conf" ]; then
-  gocryptfs -init -extpass 'printenv PASSWD' "$ENC_PATH"
+  gocryptfs -init -passfile 'printenv PASSFILE' "$ENC_PATH"
 fi
 
 # CHANGED: Start a single foreground gocryptfs process and capture its PID.
-gocryptfs $MOUNT_OPTIONS -fg -extpass 'printenv PASSWD' "$ENC_PATH" "$DEC_PATH" & child_pid=$!
+gocryptfs $MOUNT_OPTIONS -fg -passfile 'printenv PASSFILE' "$ENC_PATH" "$DEC_PATH" & child_pid=$!
 
 # CHANGED: Wait for the single gocryptfs process to exit.
 wait "$child_pid"
