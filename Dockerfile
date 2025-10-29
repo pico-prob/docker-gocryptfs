@@ -7,7 +7,8 @@ RUN go install github.com/rfjakob/gocryptfs/v2@${GOCRYPTFS_VERSION}
 FROM alpine:latest
 
 ENV MOUNT_OPTIONS="-allow_other -nosyslog" \
-    UNMOUNT_OPTIONS="-u -z"
+    UNMOUNT_OPTIONS="-u -z" \
+    BASE_PATH="/external"
 
 COPY --from=builder /go/bin/gocryptfs /usr/local/bin/gocryptfs
 RUN apk --no-cache add fuse bash

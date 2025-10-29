@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-BASE_PATH="/external"
 ENC_PATH="$BASE_PATH/encrypted"
 DEC_PATH="$BASE_PATH/decrypted"
 PWD_FILE="$BASE_PATH/pwd_file"
