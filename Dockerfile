@@ -8,10 +8,9 @@ FROM alpine:latest
 
 ENV MOUNT_OPTIONS="-allow_other -nosyslog" \
     UNMOUNT_OPTIONS="-u -z" \
-    BASE_PATH="/external" \
-    ENC_PATH="$BASE_PATH/encrypted" \
-    DEC_PATH="$BASE_PATH/decrypted" \
-    PWD_FILE="$BASE_PATH/pwd_file"
+    ENC_PATH="/external/encrypted" \
+    DEC_PATH="/external/decrypted" \
+    PWD_FILE="/external/pwd_file"
 
 COPY --from=builder /go/bin/gocryptfs /usr/local/bin/gocryptfs
 RUN apk --no-cache add fuse bash
