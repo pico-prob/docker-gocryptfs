@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-ENC_PATH="$BASE_PATH/encrypted"
-DEC_PATH="$BASE_PATH/decrypted"
-PWD_FILE="$BASE_PATH/pwd_file"
-
 function sigterm_handler {
   echo "sending SIGTERM to child pid"
   if [[ -n "${child_pid:-}" ]]; then
