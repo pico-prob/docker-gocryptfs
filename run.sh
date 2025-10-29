@@ -32,7 +32,7 @@ trap sighup_handler SIGHUP
 mkdir -p "$ENC_PATH" "$DEC_PATH"
 
 if [ -f "/pwd_file" ]; then
-  cp /pwd_file "$PWD_FILE"
+  cp -f /pwd_file "$PWD_FILE"
 fi
 
 if [ ! -f "${ENC_PATH}/gocryptfs.conf" ]; then
