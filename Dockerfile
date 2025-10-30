@@ -10,7 +10,8 @@ ENV MOUNT_OPTIONS="-allow_other -nosyslog" \
     UNMOUNT_OPTIONS="-u -z" \
     ENC_PATH="/external/encrypted" \
     DEC_PATH="/external/decrypted" \
-    PWD_FILE="/pwd_file"
+    PWD_FILE="/pwd_file" \
+    OP_MODE="default"
 
 COPY --from=builder /go/bin/gocryptfs /usr/local/bin/gocryptfs
 RUN apk --no-cache add fuse bash

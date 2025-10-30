@@ -43,6 +43,18 @@ echo "DEC_PATH: $DEC_PATH"
 echo "PWD_FILE: $PWD_FILE"
 echo
 echo "Checks:"
+switch "$OP_MODE" in
+  init_only)
+    echo "Operation mode: init_only"
+    ;;
+  default)
+    echo "Operation mode: default"
+    ;;
+  *)
+    echo "Unknown operation mode: $OP_MODE"
+    exit 1
+    ;;
+esac
 if [ -f "$PWD_FILE" ]; then
   echo "Password file found at: $PWD_FILE"
 else
@@ -73,12 +85,15 @@ else
   echo "gocryptfs filesystem found at: ${ENC_PATH}"
 fi
 echo
-echo "Mounting gocryptfs filesystem now."
-gocryptfs $MOUNT_OPTIONS -fg -passfile "$PWD_FILE" "$ENC_PATH" "$DEC_PATH" & child_pid=$!
-echo
-wait "$child_pid"
 
-echo "gocryptfs crashed at: $(date +%Y.%m.%d-%T)"
-fuse_unmount
+if [ "$OP_MODE" != "init_only" ]; then
+  echo "Mounting gocryptfs filesystem now."
+  gocryptfs $MOUNT_OPTIONS -fg -passfile "$PWD_FILE" "$ENC_PATH" "$DEC_PATH" & child_pid=$!
+  echo
+  wait "$child_pid"
+
+  echo "gocryptfs crashed at: $(date +%Y.%m.%d-%T)"
+  fuse_unmount
+fi
 
 exit $?
