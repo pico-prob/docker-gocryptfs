@@ -43,7 +43,7 @@ echo "DEC_PATH: $DEC_PATH"
 echo "PWD_FILE: $PWD_FILE"
 echo
 echo "Checks:"
-switch "$OP_MODE" in
+case "$OP_MODE" in
   init_only)
     echo "Operation mode: init_only"
     ;;
